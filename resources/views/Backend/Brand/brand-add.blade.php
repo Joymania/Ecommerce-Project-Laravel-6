@@ -8,12 +8,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Manage Category</h1>
+            <h1 class="m-0 text-dark">Manage Brand</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Category</li>
+              <li class="breadcrumb-item active">Brand</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -31,20 +31,20 @@
               <div class="card-header">
                 <h3>
                     @if (isset($editdata))
-                        Edit Category
+                        Edit Brand
                         @else
-                           Add Category
+                           Add Brand
                     @endif
 
-                  <a class=" float-right btn btn-success btn-sm" href="{{ route('category.view') }}"><i class="fa fa-plus-circle"></i>Category List</a>
+                  <a class=" float-right btn btn-success btn-sm" href="{{ route('brand.view') }}"><i class="fa fa-plus-circle"></i>Brand List</a>
                 </h3>
               </div>
               <div class="card-body">
-                <form method="post" action="{{ (@$editdata)? route('category.update',$editdata->id): route('category.store') }}" id="myform" enctype="multipart/form-data">
+                <form method="post" action="{{ (@$editdata)? route('brand.update',$editdata->id): route('brand.store') }}" id="myform" enctype="multipart/form-data">
                     @csrf
                     <div class="form-row col-md-6">
-                        <label for="description">Category Name</label>
-                        <input type="text" id="name" class="form-control" name="name" placeholder="Write Category name" value="{{ (@$editdata->name) }}" required>
+                        <label for="description">Brand Name</label>
+                        <input type="text" id="name" class="form-control" name="name" placeholder="Write Brand name"  value="{{ (@$editdata->name) }}" required>
                         <font color="red">{{ ($errors->has('name'))?($errors->first('name')): '' }}</font>
                     </div>
 

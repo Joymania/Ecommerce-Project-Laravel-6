@@ -82,5 +82,42 @@ Route::prefix('category')->group(function(){
     Route::get('/delete/{id}','Backend\CategoryController@delete')->name('category.delete');
 });
 
+Route::prefix('brand')->group(function(){
+    Route::get('/view','Backend\BrandController@view')->name('brand.view');
+    Route::get('/add','Backend\BrandController@add')->name('brand.add');
+    Route::post('/store','Backend\BrandController@store')->name('brand.store');
+    Route::get('/edit/{id}','Backend\BrandController@edit')->name('brand.edit');
+    Route::post('/update/{id}','Backend\BrandController@update')->name('brand.update');
+    Route::get('/delete/{id}','Backend\BrandController@delete')->name('brand.delete');
+});
+
+Route::prefix('color')->group(function(){
+    Route::get('/view','Backend\ColorController@view')->name('color.view');
+    Route::get('/add','Backend\ColorController@add')->name('color.add');
+    Route::post('/store','Backend\ColorController@store')->name('color.store');
+    Route::get('/edit/{id}','Backend\ColorController@edit')->name('color.edit');
+    Route::post('/update/{id}','Backend\ColorController@update')->name('color.update');
+    Route::get('/delete/{id}','Backend\ColorController@delete')->name('color.delete');
+});
+
+Route::prefix('size')->group(function(){
+    Route::get('/view','Backend\SizeController@view')->name('size.view');
+    Route::get('/add','Backend\SizeController@add')->name('size.add');
+    Route::post('/store','Backend\SizeController@store')->name('size.store');
+    Route::get('/edit/{id}','Backend\SizeController@edit')->name('size.edit');
+    Route::post('/update/{id}','Backend\SizeController@update')->name('size.update');
+    Route::get('/delete/{id}','Backend\SizeController@delete')->name('size.delete');
+});
+
+Route::prefix('product')->group(function(){
+    Route::get('/view','Backend\ProductController@view')->name('product.view');
+    Route::get('/add','Backend\ProductController@add')->name('product.add');
+    Route::post('/store','Backend\ProductController@store')->name('product.store');
+    Route::get('/edit/{id}','Backend\ProductController@edit')->name('product.edit');
+    Route::post('/update/{id}','Backend\ProductController@update')->name('product.update');
+    Route::get('/delete/{id}','Backend\ProductController@delete')->name('product.delete');
+});
+
+
 });
 

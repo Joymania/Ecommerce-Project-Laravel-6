@@ -168,6 +168,78 @@
               </li>
             </ul>
           </li>
+
+          <li class="nav-item {{ ($prefix=='/brand')?'menu-open' : '' }}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Manage Brand
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('brand.view') }}" class="nav-link {{ ($route=='brand.view')?'active': '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View Brand</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item {{ ($prefix=='/color')?'menu-open' : '' }}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Manage Color
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('color.view') }}" class="nav-link {{ ($route=='color.view')?'active': '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View Color</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item {{ ($prefix=='/size')?'menu-open' : '' }}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Manage Size
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('size.view') }}" class="nav-link {{ ($route=='size.view')?'active': '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View Size</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item {{ ($prefix=='/size')?'menu-open' : '' }}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Manage Product
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('product.view') }}" class="nav-link {{ ($route=='product.view')?'active': '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View Product</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           </ul>
     </nav>
 
