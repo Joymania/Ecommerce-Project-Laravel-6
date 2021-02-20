@@ -6,16 +6,35 @@
 
 Auth::routes();
 
+
+//Single Page Routes
 Route::get('/','Frontend\FrontendController@index')->name('index');
 Route::get('/aboutUs','Frontend\FrontendController@aboutUs')->name('aboutUs');
 Route::get('/contactUs','Frontend\FrontendController@contactUs')->name('contactUs');
 Route::get('/shoppingcart','Frontend\FrontendController@shoppingcart')->name('shoppingcart');
 Route::post('/store/contact','Frontend\FrontendController@store')->name('store.contact');
+Route::get('/productlist','Frontend\FrontendController@productlist')->name('productlist');
+Route::get('/product-category/{category_id}','Frontend\FrontendController@categoryWiseProduct')->name('category.wise.product');
+Route::get('/product-brand/{brand_id}','Frontend\FrontendController@brandWiseProduct')->name('brand.wise.product');
+Route::get('/productdetails/{slug}','Frontend\FrontendController@productdetails')->name('productdetailsinfo');
 
+//Shopiing Cart Routes
+Route::post('/add-to-cart','Frontend\CartController@insert')->name('insert.cart');
+Route::get('/show-cart','Frontend\CartController@show')->name('show.cart');
+Route::post('/store-cart','Frontend\CartController@update')->name('store.cart');
+Route::get('/delete-cart/{rowId}','Frontend\CartController@delete')->name('delete.cart');
+
+//Customer Login Routes
+Route::get('/customer-login','Frontend\CustomerloginController@customerlogin')->name('customer-login');
+Route::get('/customer-signup','Frontend\CustomerloginController@customersignup')->name('customer-signup');
+Route::post('/signup-store','Frontend\CustomerloginController@signupStore')->name('signup-store');
+Route::get('/verify-email','Frontend\CustomerloginController@verifyemail')->name('verify-email');
+Route::post('verify-store','Frontend\CustomerloginController@verifystore')->name('verify-store');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//Backend Route
 Route::group(['middleware' => ['auth']], function () {
     Route::prefix('users')->group(function(){
     Route::get('/view','Backend\UserController@view')->name('users.view');

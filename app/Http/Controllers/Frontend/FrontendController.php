@@ -7,6 +7,10 @@ use App\Model\About;
 use App\Model\Communicate;
 use App\Model\Contact;
 use App\Model\logo;
+use App\Model\Product;
+use App\Model\ProductSubImage;
+use App\Model\ProductSize;
+use App\Model\ProductColor;
 use App\Model\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -17,6 +21,9 @@ class FrontendController extends Controller
         $data['logo']=logo::first();
         $data['sliders']=Slider::all();
         $data['contact']=Contact::first();
+        $data['categories']=Product::select('category_id')->groupBy('category_id')->get();
+        $data['brands']=Product::select('brand_id')->groupBy('brand_id')->get();
+        $data['products']=Product::orderBy('id','desc')->paginate('12');
         return view('Frontend.layouts.home',$data);
     }
     public function aboutUs(){
@@ -31,7 +38,13 @@ class FrontendController extends Controller
         return view('Frontend.singlePages.contactUs',$data);
     }
     public function shoppingcart(){
-        return view('Frontend.singlePages.shopping-cart');
+        $data['logo']=logo::first();
+        $data['sliders']=Slider::all();
+        $data['contact']=Contact::first();
+        $data['categories']=Product::select('category_id')->groupBy('category_id')->get();
+        $data['brands']=Product::select('brand_id')->groupBy('brand_id')->get();
+        $data['products']=Product::orderBy('id','desc')->paginate('12');
+        return view('Frontend.singlePages.shopping-cart',$data);
     }
 
 
@@ -59,5 +72,46 @@ class FrontendController extends Controller
         return redirect()->back()->with('success','Your message successfully sent.');
 
     }
+
+    public function productlist(){
+        $data['logo']=logo::first();
+        $data['sliders']=Slider::all();
+        $data['contact']=Contact::first();
+        $data['categories']=Product::select('category_id')->groupBy('category_id')->get();
+        $data['brands']=Product::select('brand_id')->groupBy('brand_id')->get();
+        $data['products']=Product::orderBy('id','desc')->paginate('12');
+        return view('Frontend.singlePages.productlist-view',$data);
+    }
+    public function categoryWiseProduct($category_id){
+        $data['logo']=logo::first();
+        $data['contact']=Contact::first();
+        $data['products']=Product::where('category_id',$category_id)->orderBy('id','desc')->get();
+        $data['categories']=Product::select('category_id')->groupBy('category_id')->get();
+        $data['brands']=Product::select('brand_id')->groupBy('brand_id')->get();
+
+        return view('Frontend.singlePages.categorylist-view',$data);
+    }
+
+    public function brandWiseProduct($brand_id){
+        $data['logo']=logo::first();
+        $data['contact']=Contact::first();
+        $data['products']=Product::where('brand_id',$brand_id)->orderBy('id','desc')->get();
+        $data['categories']=Product::select('category_id')->groupBy('category_id')->get();
+        $data['brands']=Product::select('brand_id')->groupBy('brand_id')->get();
+
+        return view('Frontend.singlePages.brandlist-view',$data);
+    }
+
+    public function productdetails($slug){
+        $data['logo']=logo::first();
+        $data['contact']=Contact::first();
+        $data['products']=Product::where('slug',$slug)->first();
+        $data['sub_images']=ProductSubImage::where('product_id',$data['products']->id)->get();
+        $data['colors']=ProductColor::where('product_id',$data['products']->id)->get();
+        $data['sizes']=ProductSize::where('product_id',$data['products']->id)->get();
+
+        return view('Frontend.singlePages.productdetails-view',$data);
+    }
+
 
 }

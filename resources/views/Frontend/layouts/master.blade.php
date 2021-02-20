@@ -4,4 +4,6 @@
 @yield('content')
 
 
+
+
 @include('Frontend.layouts.footer')

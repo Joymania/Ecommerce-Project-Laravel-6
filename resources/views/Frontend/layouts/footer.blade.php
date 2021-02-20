@@ -6,7 +6,7 @@
                     Contact Us
                 </h4>
                 <p class="stext-107 cl7 hov-cl1 trans-04" style="font-size: 15px;">
-                    Address: Notun bazar,Gulshan-Dhaka, &nbsp; Cell: 01928511049 , &nbsp; Email: asadullahkpi@gmail.com
+                    Address: {{ $contact->address }}, &nbsp; Cell: {{ $contact->mobile_no }} , &nbsp; Email: {{ $contact->email }}
                 </p>
             </div>
 
@@ -16,18 +16,17 @@
                 </h4>
 
                 <ul class="social">
-                    <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                    <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                    <li class="youtube"><a href="#"><i class="fa fa-youtube-play"></i></a></li>
-                    <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                    <li class="facebook"><a href="{{ $contact->facebook }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+	                        <li class="twitter"><a href="{{ $contact->twitter }}"target="_blank"><i  class="fa fa-twitter"></i></a></li>
+	                        <li class="google-plus"><a href="{{ $contact->google_plus }}" target="_blank" ><i class="fa fa-google-plus"></i></a></li>
+	                        <li class="youtube"><a href="{{ $contact->youtube }}" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
                 </ul>
             </div>
         </div>
 
         <div class="p-t-40">
             <p class="stext-107 cl6 txt-center">
-                Copyright &copy;<script>document.write(new Date().getFullYear());</script> @FF. Designed & Developed By Popularsoft
+                Copyright &copy;<script>document.write(new Date().getFullYear());</script> @FF. Designed & Developed By Joymania
             </p>
         </div>
     </div>
@@ -173,11 +172,20 @@
     </div>
 </div>
 
-<script src="{{ asset('Frontend') }}/vendor/jquery/jquery-3.2.1.min.js"></script>
+
+
+
+
 <script src="{{ asset('Frontend') }}/vendor/animsition/js/animsition.min.js"></script>
 <script src="{{ asset('Frontend') }}/vendor/bootstrap/js/popper.js"></script>
 <script src="{{ asset('Frontend') }}/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="{{ asset('Frontend') }}/vendor/select2/select2.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
+
+
+
+
 <script>
     $(".js-select2").each(function(){
         $(this).select2({
@@ -186,6 +194,8 @@
         });
     })
 </script>
+<script src="{{ asset('Backend') }}/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="{{ asset('Backend') }}/plugins/jquery-validation/additional-methods.min.js"></script>
 <script src="{{ asset('Frontend') }}/vendor/daterangepicker/moment.min.js"></script>
 <script src="{{ asset('Frontend') }}/vendor/daterangepicker/daterangepicker.js"></script>
 <script src="{{ asset('Frontend') }}/vendor/slick/slick.min.js"></script>
@@ -246,6 +256,7 @@
 
 </script>
 <script src="{{ asset('Frontend') }}/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
 <script>
     $('.js-pscroll').each(function(){
         $(this).css('position','relative');

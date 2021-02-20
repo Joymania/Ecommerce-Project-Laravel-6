@@ -47,14 +47,25 @@
                         </tr>
                     </thead>
                     <tbody>
+
+
                         @foreach ($alldata as $key=> $category)
+                        @php
+                            $count_category= App\Model\Product::where('category_id',$category->id)->count();
+
+                        @endphp
                         <tr>
                             <td>{{$key+1 }}</td>
                             <td>{{ $category->name }}</td>
+
                             <td>
                                 <a href="{{ route('category.edit',$category->id) }}" title="edit" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+                                @if ($count_category<1)
                                 <a href="{{ route('category.delete',$category->id) }}" title="delete" id="delete" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                 @endif
                             </td>
+
+
                         </tr>
                         @endforeach
 

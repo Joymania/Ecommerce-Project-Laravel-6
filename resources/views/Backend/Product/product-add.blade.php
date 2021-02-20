@@ -48,7 +48,7 @@
                             <select name="category_id" id="category_id" class="form-control">
                                 <option value="">Select Category</option>
                             @foreach ($categories as $category)
-                                  <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                  <option value="{{ $category->id }}" {{ (@$editdata->category_id==$category->id)? "selected" : "" }}>{{ $category->name }}</option>
                             @endforeach
                             </select>
 
@@ -58,7 +58,7 @@
                             <select name="brand_id" id="brand_id" class="form-control">
                                 <option value="">Select Brand</option>
                             @foreach ($brands as $brand)
-                                  <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                  <option value="{{ $brand->id }}"{{ (@$editdata->id)? "selected" : "" }}>{{ $brand->name }}</option>
                             @endforeach
                             </select>
 
@@ -74,7 +74,7 @@
                             <label for="">Color</label>
                             <select name="color_id[]"  class="form-control select2" multiple>
                             @foreach ($colors as $color)
-                                  <option value="{{ $color->id }}">{{ $color->name }}</option>
+                                  <option value="{{ $color->id }}"{{ $color->name }} {{ (@in_array(['color_id'=>$color->id],$color_array))? "selected" : "" }}>{{ $color->name }}</option>
                             @endforeach
 
                             </select>
@@ -85,7 +85,7 @@
                             <label for="">Size</label>
                             <select name="size_id[]"  class="form-control select2" multiple>
                             @foreach ($sizes as $size)
-                                  <option value="{{ $size->id }}">{{ $size->name }}</option>
+                                  <option value="{{ $size->id }}" {{ (@in_array(['size_id'=>$size->id],$size_array))? "selected" : "" }}>{{ $size->name }}</option>
                             @endforeach
 
                             </select>
@@ -94,19 +94,19 @@
 
                         <div class="form-group col-md-12">
                             <label for="">Short Description</label>
-                           <textarea name="short_desc" id="short_desc" class="form-control" ></textarea>
+                           <textarea name="short_desc" id="short_desc" class="form-control" >{{ @$editdata->short_desc }}</textarea>
                         <font color="red">{{ ($errors->has('short_desc'))?($errors->first('short_desc')): '' }}</font>
                         </div>
 
                         <div class="form-group col-md-12">
                             <label for="">Long Description</label>
-                           <textarea name="long_desc" id="long_desc" class="form-control" rows="5" ></textarea>
+                           <textarea name="long_desc" id="long_desc" class="form-control" rows="5" >{{ @$editdata->long_desc }}</textarea>
                         <font color="red">{{ ($errors->has('long_desc'))?($errors->first('long_desc')): '' }}</font>
                         </div>
 
                         <div class="form-group col-md-3">
                             <label for="">Price</label>
-                         <input type="number" name="price" id="price" class="form-control">
+                         <input type="number" name="price" id="price" class="form-control" value="{{ @$editdata->price }}">
                         <font color="red">{{ ($errors->has('price'))?($errors->first('price')): '' }}</font>
                         </div>
 
