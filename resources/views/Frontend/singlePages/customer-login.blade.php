@@ -29,8 +29,25 @@
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
                     <div id="login-box" class="col-md-12">
-                        <form id="login-form" class="form" action="" method="post">
+                        <form id="login-form" class="form" action="{{ route('login') }}" method="post">
                             @csrf
+                            @if ($errors->any())
+                            <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            @foreach ($errors->all() as $error)
+                                <strong>{{ $error }}</strong>
+                                <br>
+                            @endforeach
+
+                          </div>
+                        @endif
+                        @if (Session::get('message'))
+                            <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>{{ Session::get('message') }}</strong>
+
+                          </div>
+                        @endif
                             <h3 class="text-center text-info">Login</h3>
                             <div class="form-group">
                                 <label for="username" class="text-info">Email:</label><br>

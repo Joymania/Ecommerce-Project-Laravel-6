@@ -39,11 +39,11 @@
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="usertype">User Role</label>
-                            <select name="usertype" id="usertype" class="form-control">
+                            <label for="role">User Role</label>
+                            <select name="role" id="role" class="form-control">
                                 <option value="">Select Role</option>
-                                <option value="Admin"{{ ($editdata->usertype=="Admin")?"selected":""}}>Admin</option>
-                                <option value="User"{{ ($editdata->usertype=="User")?"selected":""}}>User</option>
+                                <option value="admin"{{ ($editdata->role=="admin")?"selected":""}}>Admin</option>
+                                <option value="user"{{ ($editdata->role=="user")?"selected":""}}>User</option>
                             </select>
 
                         </div>

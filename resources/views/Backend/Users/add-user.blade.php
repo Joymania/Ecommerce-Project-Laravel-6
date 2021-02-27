@@ -39,11 +39,11 @@
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="usertype">User Role</label>
-                            <select name="usertype" id="usertype" class="form-control">
+                            <label for="role">User Role</label>
+                            <select name="role" id="role" class="form-control">
                                 <option value="">Select Role</option>
-                                <option value="Admin">Admin</option>
-                                <option value="User">User</option>
+                                <option value="admin">Admin</option>
+                                <option value="user">User</option>
                             </select>
 
                         </div>

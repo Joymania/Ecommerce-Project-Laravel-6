@@ -7,7 +7,7 @@
     <!-- Brand Logo -->
     <a href="" class="brand-link">
       <img src="{{ asset('Backend') }}/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Zonaid</span>
+      <span class="brand-text font-weight-light">Ecommerce Project</span>
     </a>
 
 
@@ -30,7 +30,7 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
-            @if (Auth::user()->usertype=='Admin')
+            @if (Auth::user()->role=='admin')
                 <li class="nav-item has-treeview {{ ($prefix=='/users')?'menu-open' : '' }}">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-copy"></i>
@@ -236,6 +236,57 @@
                 <a href="{{ route('product.view') }}" class="nav-link {{ ($route=='product.view')?'active': '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>View Product</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item {{ ($prefix=='/customer')?'menu-open' : '' }}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Manage Customer
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('customer.view') }}" class="nav-link {{ ($route=='customer.view')?'active': '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View Customer</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{ route('draft.view') }}" class="nav-link {{ ($route=='draft.view')?'active': '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Draft Customer</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+
+          <li class="nav-item {{ ($prefix=='/orders')?'menu-open' : '' }}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Manage Orders
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('pending-orders') }}" class="nav-link {{ ($route=='pending-orders')?'active': '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pending Orders</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{ route('approved-orders') }}" class="nav-link {{ ($route=='approved-orders')?'active': '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Approved Orders</p>
                 </a>
               </li>
             </ul>

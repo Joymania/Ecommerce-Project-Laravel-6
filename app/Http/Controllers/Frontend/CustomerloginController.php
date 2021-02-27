@@ -14,7 +14,11 @@ use App\Model\ProductSize;
 use App\Model\ProductColor;
 use App\Model\Slider;
 use App\User;
+use App\Model\Shipping;
+// use Illuminate\Contracts\Session\Session;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Session;
 
 class CustomerloginController extends Controller
 {
@@ -31,12 +35,12 @@ class CustomerloginController extends Controller
     public function signupStore(Request $request){
         $code=rand(0000,9999);
         $data =new User();
-        $data->name=$request->name;
-        $data->email=$request->email;
-        $data->mobile=$request->mobile;
-        $data->password=bcrypt($request->password);
-        $data->code=$code;
-        $data->status='0';
+        $data->name= $request->name;
+        $data->email= $request->email;
+        $data->mobile= $request->mobile;
+        $data->password= bcrypt($request->password);
+        $data->code= $code;
+        $data->status= '0';
         $data->usertype='customer';
         $data->save();
 
@@ -73,6 +77,30 @@ class CustomerloginController extends Controller
         {
             return redirect()->back()->with('error','Sorry! Email and Verification Code doesnott Match.');
         }
+
+    }
+
+    public function customercheckout(){
+        $data['logo']=logo::first();
+        $data['contact']=Contact::first();
+        return view('Frontend.singlePages.customer-checkout',$data);
+    }
+
+    public function checkoutstore(Request $request){
+        $this->validate($request,[
+            'name' => 'required',
+            'mobile' => 'required',
+            'address' => 'required',
+        ]);
+        $checkout= new Shipping();
+        $checkout->user_id=Auth::user()->id;
+        $checkout->name = $request->name;
+        $checkout->email = $request->email;
+        $checkout->mobile = $request->mobile;
+        $checkout->address = $request->address;
+        $checkout->save();
+        Session::put('shipping_id',$checkout->id);
+        return redirect()->route('customer.payment')->with('success','Data Saved Successfully');
 
     }
 

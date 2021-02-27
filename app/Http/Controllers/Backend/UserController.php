@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function view(){
-        $data['alldata']=User::all();
+        $data['alldata']=User::where('usertype','admin')->where('status','1')->get();
         return view('Backend.Users.user-view',$data);
     }
     public function add(){
@@ -23,9 +23,10 @@ class UserController extends Controller
             'email'=>'required|unique:users,email'
         ]);
         $data=new User();
-        $data->usertype=$request->usertype;
+        $data->usertype='Admin';
         $data->name=$request->name;
         $data->email=$request->email;
+        $data->role=$request->role;
         $data->password=bcrypt($request->password);
         $data->save();
         return redirect()->route('users.view')->with('success', 'Data Store Successfully.');
@@ -38,7 +39,7 @@ class UserController extends Controller
     }
     public function update(Request $request, $id){
         $data=User::find($id);
-        $data->usertype=$request->usertype;
+        $data->role=$request->role;
         $data->name=$request->name;
         $data->email=$request->email;
         $data->save();

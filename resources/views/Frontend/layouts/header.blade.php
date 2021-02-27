@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
@@ -79,7 +80,13 @@
 	                            <a href="#">SHOPS</a>
 	                            <ul class="sub-menu">
 	                                <li><a href="{{ route('productlist') }}">Products</a></li>
-	                                <li><a href="shoping-cart.html">Checkout</a></li>
+                                    @if (@Auth::user()->id ==NULL && Session::get('shipping_id')==NULL)
+	                                <li><a href="{{ route('customer-login') }}">Checkout</a></li>
+                                    @elseif(@Auth::user()->id !=NULL && Session::get('shipping_id')!=NULL)
+                                    <li><a href="{{ route('customer.payment') }}">Checkout</a></li>
+                                    @else
+                                    <li><a href="{{ route('customer-checkout') }}">Checkout</a></li>
+                                    @endif
 	                                <li><a href="{{ route('shoppingcart') }}">Cart</a></li>
 	                            </ul>
 	                        </li>
@@ -89,8 +96,26 @@
 	                        <li>
 	                            <a href="{{ route('contactUs') }}">CONTACT US</a>
 	                        </li>
+                            @if (@Auth::user()->id !=NULL && @Auth::user()->usertype=='customer')
+                                <li class="active-menu">
+                                    <a href="#">Accounts</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="{{ route('dashboard') }}">My Profile</a></li>
+                                        <li><a href="{{ route('password-change') }}">Password Change</a></li>
+                                        <li><a href="{{ route('order-list') }}">My Orders</a></li>
+                                        <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                          document.getElementById('logout-form').submit();"
+                                                          > Logout</a></li>
+                                                          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                            @csrf
+                                                        </form>
+                                    </ul>
+                                </li>
+                            @else
+                                 <li><a href="{{ route('customer-login') }}">LOGIN</a></li>
 
-	                        <li><a href="{{ route('customer-login') }}">LOGIN</a></li>
+                            @endif
+
 	                    </ul>
 					</div>
 
@@ -151,13 +176,19 @@
 			</ul>
 
 			<ul class="main-menu-m">
-				<li><a href="index.html">Home</a></li>
+				<li><a href="{{ route('index') }}">Home</a></li>
 				<li>
 					<a href="">SHOPS</a>
 					<ul class="sub-menu-m">
-						<li><a href="">Products</a></li>
-                        <li><a href="">Checkout</a></li>
-                        <li><a href="">Cart</a></li>
+						<li><a href="{{ route('productlist') }}">Products</a></li>
+                        @if (@Auth::user()->id ==NULL && Session::get('shipping_id')==NULL)
+                        <li><a href="{{ route('customer-login') }}">Checkout</a></li>
+                        @elseif(@Auth::user()->id !=NULL && Session::get('shipping_id')!=NULL)
+                        <li><a href="{{ route('customer.payment') }}">Checkout</a></li>
+                        @else
+                        <li><a href="{{ route('customer-checkout') }}">Checkout</a></li>
+                        @endif
+                        <li><a href="{{ route('shoppingcart') }}">Cart</a></li>
 					</ul>
 					<span class="arrow-main-menu-m">
 						<i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -169,7 +200,28 @@
                 <li>
                     <a href="contact.html">CONTACT US</a>
                 </li>
-                <li><a href="">LOGIN</a></li>
+                @if (@Auth::user()->id !=NULL && @Auth::user()->usertype=='customer')
+                <li>
+					<a href="">Accounts</a>
+					<ul class="sub-menu-m">
+                        <li><a href="{{ route('dashboard') }}">My Profile</a></li>
+                        <li><a href="{{ route('password-change') }}">Password Change</a></li>
+                        <li><a href="{{ route('order-list') }}">My Orders</a></li>
+                        <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                          document.getElementById('logout').submit();"
+                                          > Logout</a></li>
+                                          <form id="logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                         </form>
+					</ul>
+					<span class="arrow-main-menu-m">
+						<i class="fa fa-angle-right" aria-hidden="true"></i>
+					</span>
+				</li>
+
+                @else
+                   <li><a href="{{ route('customer-login') }}">LOGIN</a></li>
+                @endif
 			</ul>
 		</div>
 
@@ -248,10 +300,19 @@
 						<a href="{{ route('shoppingcart') }}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
 							View Cart
 						</a>
-
-						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+                        @if (@Auth::user()->id ==NULL && Session::get('shipping_id')==NULL)
+						<a href="{{ route('customer-login') }}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
 							Check Out
 						</a>
+                        @elseif(@Auth::user()->id !=NULL && Session::get('shipping_id')!=NULL)
+                        <a href="{{ route('customer.payment') }}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+							Check Out
+						</a>
+                        @else
+                        <a href="{{ route('customer-checkout') }}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+							Check Out
+						</a>
+                        @endif
 					</div>
 				</div>
 			</div>

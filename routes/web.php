@@ -4,7 +4,7 @@
 //     return view('welcome');
 // });
 
-Auth::routes();
+
 
 
 //Single Page Routes
@@ -17,6 +17,8 @@ Route::get('/productlist','Frontend\FrontendController@productlist')->name('prod
 Route::get('/product-category/{category_id}','Frontend\FrontendController@categoryWiseProduct')->name('category.wise.product');
 Route::get('/product-brand/{brand_id}','Frontend\FrontendController@brandWiseProduct')->name('brand.wise.product');
 Route::get('/productdetails/{slug}','Frontend\FrontendController@productdetails')->name('productdetailsinfo');
+Route::post('/find-product','Frontend\FrontendController@findproduct')->name('find-product');
+Route::get('/get-product','Frontend\FrontendController@getproduct')->name('get-product');
 
 //Shopiing Cart Routes
 Route::post('/add-to-cart','Frontend\CartController@insert')->name('insert.cart');
@@ -30,12 +32,34 @@ Route::get('/customer-signup','Frontend\CustomerloginController@customersignup')
 Route::post('/signup-store','Frontend\CustomerloginController@signupStore')->name('signup-store');
 Route::get('/verify-email','Frontend\CustomerloginController@verifyemail')->name('verify-email');
 Route::post('verify-store','Frontend\CustomerloginController@verifystore')->name('verify-store');
+Route::get('/customercheckout','Frontend\CustomerloginController@customercheckout')->name('customer-checkout');
+Route::post('/checkout/store','Frontend\CustomerloginController@checkoutstore')->name('checkout-store');
 
 
-Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes();
+//Customer Dashboard
+Route::group(['middleware' =>['auth','customer']],function(){
 
-//Backend Route
-Route::group(['middleware' => ['auth']], function () {
+    Route::get('/dashboard','Frontend\DashboardController@dashboard')->name('dashboard');
+    Route::get('/editprofile','Frontend\DashboardController@editprofile')->name('edit-profile');
+    Route::post('/updateprofile','Frontend\DashboardController@updateprofile')->name('update-profile');
+    Route::get('/password-change','Frontend\DashboardController@passwordchange')->name('password-change');
+    Route::post('/password-update','Frontend\DashboardController@passwordupdate')->name('password-update');
+
+    Route::get('/customer-payment','Frontend\DashboardController@customerpayment')->name('customer.payment');
+    Route::post('/payment-store','Frontend\DashboardController@paymentstore')->name('payment-store');
+
+    Route::get('/order-list','Frontend\DashboardController@orderlist')->name('order-list');
+    Route::get('/order-details/{id}','Frontend\DashboardController@orderdetails')->name('order-details');
+     Route::get('/print-details/{id}','Frontend\DashboardController@printdetails')->name('print-details');
+
+});
+
+
+//Admin Dashboard
+Route::group(['middleware' => ['auth','admin']], function () {
+
+    Route::get('/home', 'HomeController@index')->name('home');
     Route::prefix('users')->group(function(){
     Route::get('/view','Backend\UserController@view')->name('users.view');
     Route::get('/add','Backend\UserController@add')->name('users.add');
@@ -137,6 +161,19 @@ Route::prefix('product')->group(function(){
     Route::get('/delete/{id}','Backend\ProductController@delete')->name('product.delete');
 });
 
-
+Route::prefix('customer')->group(function(){
+    Route::get('/customerview','Backend\CustomerController@customerview')->name('customer.view');
+    Route::get('/draftview','Backend\CustomerController@draftview')->name('draft.view');
+    Route::get('/draftdelete/{id}','Backend\CustomerController@delete')->name('draft.delete');
 });
 
+Route::prefix('orders')->group(function(){
+    Route::get('/pending/orders','Backend\OrderController@pendingorders')->name('pending-orders');
+    Route::get('/approved/orders','Backend\OrderController@approvedorders')->name('approved-orders');
+    Route::get('/order/approved/{id}','Backend\OrderController@orderapproved')->name('order-approved');
+
+    Route::get('/details/order/{id}','Backend\OrderController@detailsorder')->name('details-order');
+});
+
+
+});

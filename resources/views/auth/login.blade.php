@@ -49,6 +49,13 @@
 
                       </div>
                     @endif
+                    @if (Session::get('message'))
+                        <div class="alert alert-danger alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>{{ Session::get('message') }}</strong>
+
+                      </div>
+                    @endif
 
 					<div class="wrap-input100 validate-input m-b-26" data-validate="Usermail is required">
 						<span class="label-input100">UserEmail</span>
@@ -64,7 +71,7 @@
                         </div>
 					</div>
 
-					<div class="flex-sb-m w-full p-b-30">
+					{{-- <div class="flex-sb-m w-full p-b-30">
 						<div class="contact100-form-checkbox">
 							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
 							<label class="label-checkbox100" for="ckb1">
@@ -77,7 +84,7 @@
 								Forgot Password?
 							</a>
 						</div>
-					</div>
+					</div> --}}
 
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">

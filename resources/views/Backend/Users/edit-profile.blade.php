@@ -77,7 +77,7 @@
 
                         </div>
                         <div class="form-group col-md-2">
-                            <img id="showImage" src="{{ (!empty($editdata->image))?url('upload/user_images/'.$editdata->image):url('upload/noImage.jpg') }}" alt="" style="width:150px; height:160px;border:1px solid black">
+                            <img id="showImage" src="{{ (!empty($editdata->image))?url('upload/user_images/'.$editdata->image):url('upload/noImage.jpg') }}" alt="" style="width:150px; padding-right:130%; height:160px;border:1px solid black">
                         </div>
 
 

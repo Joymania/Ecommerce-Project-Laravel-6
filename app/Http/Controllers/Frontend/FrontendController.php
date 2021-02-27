@@ -14,7 +14,7 @@ use App\Model\ProductColor;
 use App\Model\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-
+use DB;
 class FrontendController extends Controller
 {
     public function index(){
@@ -111,6 +111,42 @@ class FrontendController extends Controller
         $data['sizes']=ProductSize::where('product_id',$data['products']->id)->get();
 
         return view('Frontend.singlePages.productdetails-view',$data);
+    }
+
+    public function findproduct(Request $request){
+        $slug= $request->slug;
+        $data['products']=Product::where('slug',$slug)->first();
+        if($data['products']){
+            $data['logo']=logo::first();
+        $data['contact']=Contact::first();
+        $data['products']=Product::where('slug',$slug)->first();
+        $data['sub_images']=ProductSubImage::where('product_id',$data['products']->id)->get();
+        $data['colors']=ProductColor::where('product_id',$data['products']->id)->get();
+        $data['sizes']=ProductSize::where('product_id',$data['products']->id)->get();
+
+        return view('Frontend.singlePages.find-product',$data);
+        }
+        else
+        {
+            return redirect()->back()->with('error','Doesnot match any product');
+        }
+
+    }
+
+    public function getproduct(Request $request){
+        $slug=$request->slug;
+        $productData=DB::table('products')
+        ->where('slug','LIKE','%'.$slug.'%')
+        ->get();
+        $html = '';
+        $html .= '<div><ul>';
+        if($productData){
+            foreach($productData as $v){
+                $html .= '<li>'.$v->slug. '</li>';
+            }
+        }
+        $html .= '</ul></div>';
+        return response()->json($html);
     }
 
 

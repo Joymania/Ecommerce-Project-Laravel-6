@@ -57,7 +57,7 @@
                         </span>
 
                         <p class="stext-115 cl6 size-213 p-t-18">
-                            Notun bazar,Gulshan-Dhaka
+                            {{ $contact->address }}
                         </p>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                         </span>
 
                         <p class="stext-115 cl1 size-213 p-t-18">
-                            +880 1704247162
+                            {{ $contact->mobile_no }}
                         </p>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                         </span>
 
                         <p class="stext-115 cl1 size-213 p-t-18">
-                            khorshedicepust@gmail.com
+                            {{ $contact->email }}
                         </p>
                     </div>
                 </div>
@@ -102,7 +102,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.5983460988937!2d90.42140761445673!3d23.79731309290065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c7ba919c9e8f%3A0x74c8c1dc2d04bd18!2sNatun%20Bazar%20Foot%20Over%20Bridge%2C%20Dhaka%201212!5e0!3m2!1sen!2sbd!4v1575619103631!5m2!1sen!2sbd" width="100%" height="300px" frameborder="0" style="border:0" allowfullscreen></iframe>
+            <iframe width="100%" height="300px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3084.4734897454186!2d89.27786434212067!3d24.013547109416997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fe84f0ec23a72b%3A0x775d6cd53cbdad8b!2sPabna+University+of+Science+And+Technology!5e1!3m2!1sen!2sbd!4v1533635221275" style="border:0" allowfullscreen></iframe>
         </div>
     </div>
 </div><br/>
