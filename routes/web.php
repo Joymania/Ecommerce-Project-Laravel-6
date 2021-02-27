@@ -11,6 +11,8 @@
 Route::get('/','Frontend\FrontendController@index')->name('index');
 Route::get('/aboutUs','Frontend\FrontendController@aboutUs')->name('aboutUs');
 Route::get('/contactUs','Frontend\FrontendController@contactUs')->name('contactUs');
+
+// Route::post('/contactstore','Frontend\FrontendController@contactstore')->name('contactstore');
 Route::get('/shoppingcart','Frontend\FrontendController@shoppingcart')->name('shoppingcart');
 Route::post('/store/contact','Frontend\FrontendController@store')->name('store.contact');
 Route::get('/productlist','Frontend\FrontendController@productlist')->name('productlist');

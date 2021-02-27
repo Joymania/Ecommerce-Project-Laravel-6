@@ -12,7 +12,8 @@
     <div class="container">
         <div class="flex-w flex-tr">
             <div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
-                <form method="post" action="" id="form">
+                <form method="post" action="{{ route('store.contact') }}" id="form">
+                    @csrf
                     <h4 class="mtext-105 cl2 txt-center p-b-30">
                         Send Us A Message
                     </h4>
@@ -29,7 +30,7 @@
                     </div>
 
                     <div class="bor8 m-b-20 how-pos4-parent">
-                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="mobile" placeholder="Your Mobile Number" value="" required="">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="mobile_no" placeholder="Your Mobile Number" value="" required="">
                         <img class="how-pos4 pointer-none" src="{{ asset('Frontend') }}/images/icons/mobile.png" alt="ICON">
                         <font color="red"><b></b></font>
                     </div>

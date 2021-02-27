@@ -72,6 +72,9 @@ class FrontendController extends Controller
         return redirect()->back()->with('success','Your message successfully sent.');
 
     }
+    public function contactstore(Request $request){
+
+    }
 
     public function productlist(){
         $data['logo']=logo::first();
